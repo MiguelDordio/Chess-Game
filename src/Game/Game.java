@@ -238,12 +238,12 @@ public class Game {
     public void makeCastleLong(Board board,Spot King, Spot newSpot){
         board.getSpot(newSpot.getX(),newSpot.getY()).setPiece(King.getPiece());
         if(King.getPiece().getPieceColour() == PieceColour.WHITE){
-            board.getSpot(newSpot.getX(), newSpot.getY()+1).setPiece(board.getWhite_Rook2().getPiece());
+            board.getSpot(newSpot.getX(), newSpot.getY()+1).setPiece(board.getWhite_Rook1().getPiece());
             board.getSpot(newSpot.getX(), newSpot.getY()-2).setAvailable();
             board.getSpot(King.getX(), King.getY()).setAvailable();
             board.setWhite_King(newSpot);
         }else{
-            board.getSpot(newSpot.getX(), newSpot.getY()-1).setPiece(board.getWhite_Rook2().getPiece());
+            board.getSpot(newSpot.getX(), newSpot.getY()+1).setPiece(board.getWhite_Rook1().getPiece());
             board.getSpot(newSpot.getX(), newSpot.getY()-2).setAvailable();
             board.getSpot(King.getX(), King.getY()).setAvailable();
             board.setBlack_King(newSpot);
@@ -359,6 +359,8 @@ public class Game {
                     }
                 }
             }
+            x = spot.getX();
+            y = spot.getY();
         }
         return false;
     }
