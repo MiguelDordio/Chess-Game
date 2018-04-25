@@ -128,11 +128,25 @@ public class ChessGUI extends JFrame{
                             if(player1.getTurn() == player2.getTurn()){ //if turn have the same value for both players its white´s turn
                                 if(game.isValidMove(board, player1)){
                                     printChess(board);
+                                    if(game.checkMate(board, player2.getPlayerKing(board, player2.getPieceColour()))) {
+                                        if (player2.getPieceColour() == PieceColour.WHITE) {
+                                            System.out.println("Checkmate, White wins");
+                                            player1.setWins(player1.getWins() + 1);
+                                            player1.setTurn(0);
+                                        }
+                                    }
                                     clicked = 0;
                                 }
                             }else if(player1.getTurn() > player2.getTurn()){
                                 if(game.isValidMove(board, player2)){
                                     printChess(board);
+                                    if(game.checkMate(board, player1.getPlayerKing(board, player1.getPieceColour()))){
+                                        if(player1.getPieceColour() == PieceColour.WHITE){
+                                            System.out.println("Checkmate, Black wins");
+                                            player2.setWins(player2.getWins()+1);
+                                            player2.setTurn(0);
+                                        }
+                                    }
                                     clicked = 0;
                                 }
                             }

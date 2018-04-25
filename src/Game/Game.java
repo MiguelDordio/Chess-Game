@@ -44,34 +44,22 @@ public class Game {
     public boolean isValidMove(Board board, Player player){
         Spot current = board.getSpot(getFromX(), getFromY());
         Spot newSpot = board.getSpot(getToX(), getToY());
-        if(checkMate(board, player.getPlayerKing(board, player.getPieceColour()))){
-            if(player.getPieceColour() == PieceColour.WHITE){
-                System.out.println("Checkmate, Black wins");
-                player.setWins(player.getWins()+1);
-                player.setTurn(0);
-            }else{
-                System.out.println("Checkmate, White wins");
-                player.setWins(player.getWins()+1);
-                player.setTurn(0);
-            }
-        }else{
-            if(board.getSpot(getToX(), getToY()).isOccupied()){
-                if(board.getSpot(getToX(), getToY()).getPiece().getPieceColour() != player.getPieceColour()){
-                    if(move(board, current, newSpot, player.getPlayerKing(board, player.getPieceColour()))){
-                        player.setTurn(player.getTurn()+1);
-                        return true;
-                    }
-                }
-            }else{
-                if(!Castle(board, player.getPlayerKing(board, player.getPieceColour()), newSpot)){
-                    if(move(board, current, newSpot, player.getPlayerKing(board, player.getPieceColour()))){
-                        player.setTurn(player.getTurn()+1);
-                        return true;
-                    }
-                }else{
+        if(board.getSpot(getToX(), getToY()).isOccupied()){
+            if(board.getSpot(getToX(), getToY()).getPiece().getPieceColour() != player.getPieceColour()){
+                if(move(board, current, newSpot, player.getPlayerKing(board, player.getPieceColour()))){
                     player.setTurn(player.getTurn()+1);
                     return true;
                 }
+            }
+        }else{
+            if(!Castle(board, player.getPlayerKing(board, player.getPieceColour()), newSpot)){
+                if(move(board, current, newSpot, player.getPlayerKing(board, player.getPieceColour()))){
+                    player.setTurn(player.getTurn()+1);
+                    return true;
+                }
+            }else{
+                player.setTurn(player.getTurn()+1);
+                return true;
             }
         }
         return false;
